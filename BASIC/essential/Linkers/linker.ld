@@ -2,13 +2,13 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-    FLASH(rx): ORIGIN =0x08000000, LENGTH =256K
-    SRAM(rwx): ORIGIN =0x20000000, LENGTH =60K
+    FLASH(rx): ORIGIN =0x08000000, LENGTH =512K
+    SRAM(rwx): ORIGIN =0x20000000, LENGTH =128K
 }
 
 _estack = ORIGIN(SRAM) + LENGTH(SRAM);
 
-_Min_Heap_Size = 0x200; 
+_Min_Heap_Size = 0x2000; 
 _Min_Stack_Size = 0x400;
 
 SECTIONS
@@ -62,7 +62,19 @@ SECTIONS
         KEEP (*(SORT(.dtors.*)))
         KEEP (*crtend.o(.dtors))
       . = ALIGN(4);
+      _efixed = .;
 
+    } > FLASH
+
+    /* These are require for C++ and for C programs that try to examine backtraces. */
+    .ARM.extab : {
+      *(.ARM.extab* .gnu.linkonce.armextab.*)
+    } > FLASH
+
+    .ARM.exidx : {
+        PROVIDE (__exidx_start = .);
+        *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+        PROVIDE (__exidx_end = .);
     } > FLASH
 
 
