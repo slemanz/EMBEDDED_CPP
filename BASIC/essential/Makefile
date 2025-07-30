@@ -19,6 +19,7 @@ OBJCOPY=arm-none-eabi-objcopy
 #				 INCLUDES
 
 INCLUDES+= -I App/Inc/
+INCLUDES+= -I Drivers/Inc/
 
 
 ############################################
@@ -28,7 +29,7 @@ OBJS		+= $(BUILD_DIR)/main.o
 OBJS		+= $(BUILD_DIR)/syscalls.o
 OBJS		+= $(BUILD_DIR)/startup.o
 
-OBJS		+= $(BUILD_DIR)/uart.o
+DRIVERS		+= $(BUILD_DIR)/uart.o
 
 
 PREREQ = $(BUILD_DIR)/
@@ -41,10 +42,13 @@ $(PREREQ):
 $(BUILD_DIR)/%.o: App/Src/%.cpp
 	$(CPP) $(CPPFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o App/Src/$(*).cpp
 
+$(BUILD_DIR)/%.o: Drivers/Src/%.cpp
+	$(CPP) $(CPPFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o Drivers/Src/$(*).cpp
+
 $(BUILD_DIR)/%.o: Linkers/*.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o Linkers/$(*).c
 
-$(BUILD_DIR)/$(TARGET).elf: $(OBJS) $(DRIVERS) $(BSP)
+$(BUILD_DIR)/$(TARGET).elf: $(OBJS) $(DRIVERS)
 	$(CC) $(LDFLAGS) -o $@ $^
 	$(OBJCOPY) -O binary $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).bin
 	arm-none-eabi-size $(BUILD_DIR)/$(TARGET).elf
