@@ -19,7 +19,6 @@ OBJCOPY=arm-none-eabi-objcopy
 #				 INCLUDES
 
 INCLUDES+= -I App/Inc/
-INCLUDES+= -I Drivers/Inc/ 
 
 
 ############################################
@@ -37,8 +36,8 @@ all: $(PREREQ) $(BUILD_DIR)/$(TARGET).elf
 $(PREREQ):
 	mkdir $(PREREQ)
 
-$(BUILD_DIR)/%.o: App/Src/%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o App/Src/$(*).c
+$(BUILD_DIR)/%.o: App/Src/%.cpp
+	$(CPP) $(CPPFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o App/Src/$(*).cpp
 
 $(BUILD_DIR)/%.o: Linkers/*.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o Linkers/$(*).c
@@ -49,7 +48,7 @@ $(BUILD_DIR)/$(TARGET).elf: $(OBJS) $(DRIVERS) $(BSP)
 	arm-none-eabi-size $(BUILD_DIR)/$(TARGET).elf
 
 load:
-	openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg \
+	openocd -f interface/jlink.cfg -c "transport select swd" -f target/stm32f4x.cfg \
 	-c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
 
 clean:
