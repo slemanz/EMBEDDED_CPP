@@ -16,6 +16,8 @@ void uart_init(void)
     UART2->CR3 = 0x000; // no flow control
     UART2->CR1 |= 0x2000; /*enable USART2*/
 
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
     //setvbuf(stdout, NULL, _IONBF, 0);
 }
 
@@ -39,4 +41,22 @@ extern int __io_putchar(int ch)
     uart_write(ch);
     return ch;
 }
+
+extern int __io_getchar(void)
+{
+    int c;
+
+    c = uart_read();
+    
+    if(c == '\r')
+    {
+        uart_write(c);
+        c = '\n';
+    }
+
+    uart_write(c);
+
+    return c;
+}
+
 }

@@ -59,8 +59,27 @@ int main() {
 
 **[Car example](App/Src/car.cpp)**
 
+### Dynamic Allocation
+
+Dynamic memory allocation in C++ refers to the process of allocating memory
+during the runtime of a program, rather than at compile time. This is in
+contrast to static or stack-based memory allocation, where memory is reserved
+when the program is compiled or when a function is called, respectively.
+
+```Cpp
+    int* p_int = new int; // Allocates memory for a single integer
+    int* p_array = new int[10]; // Allocates memory for an array of 10 integers
+
+    delete p_int; // Deallocates memory for a single integer
+    delete[] p_array; // Deallocates memory for an array
+```
+
+**[Dynamic example](App/Src/dynamic.cpp)**
+
+
 ---
 
 ### Examples
 
 1. **[Car example](App/Src/car.cpp)**
+2. **[Dynamic example](App/Src/dynamic.cpp)**
