@@ -204,6 +204,29 @@ void incrementByAddress(int* numPtr)
 
 ### Return by Address
 
+It refers to a function returning the memory address (pointer) of a variable or
+dynamically allocated object. This allows the caller to access or modify the
+data stored at that address.
+
+```cpp
+int* createAndReturnPointer()
+{
+    static int value = 100; // Using static storage duration to ensure the variable exists after the function returns
+    return &value; // Return the address of 'value'
+}
+```
+
+or
+
+```cpp
+int* createAndReturnPointer()
+{
+    int* value; // Declare a pointer to an integer
+    value = new int; // Dynamically allocate memory for one integer
+    *value = 25; // Assign a value to the dynamically allocated integer
+    return value; // Return the address of 'value'
+}
+```
 
 ---
 
