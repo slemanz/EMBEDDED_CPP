@@ -113,6 +113,34 @@ Other example:
 	printf("norm_alias is %d \n", norm_alias);  // 234
 ```
 
+### Function Template
+
+A function template in C++ is a blueprint or a generic definition for a family
+of functions that can operate on different data types without requiring the code
+to be rewritten for each specific type. 
+
+- A function template begins with the `template` keyword, followed by template
+parameters enclosed in angle brackets `(<>)`, and then the function's signature
+and body.
+
+- typename T: This declares T as a template type parameter, which acts as a
+placeholder for any data type (e.g., int, float, double, or custom classes).
+class can be used interchangeably with typename in this context.
+
+```cpp
+template <typename T>
+T add(T a, T b) 
+{
+    return a + b;
+}
+```
+
+**[Template example](App/Src/template.cpp)**
+
+### Default Arguments
+
+
+
 
 ---
 
@@ -120,3 +148,4 @@ Other example:
 
 1. **[Car example](App/Src/car.cpp)**
 2. **[Dynamic example](App/Src/dynamic.cpp)**
+3. **[Template example](App/Src/template.cpp)**
