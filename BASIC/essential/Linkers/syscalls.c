@@ -143,3 +143,9 @@ caddr_t _sbrk(int incr)
 
     return (caddr_t) prev_heap_end;
 }
+
+int getentropy(void* buffer, size_t length)
+{
+  buffer = buffer; length = length;
+  return -ENOSYS;
+}

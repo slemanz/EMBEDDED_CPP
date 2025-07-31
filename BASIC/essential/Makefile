@@ -3,7 +3,7 @@ CPP = arm-none-eabi-g++
 TARGET=flash
 
 MACH= -mcpu=cortex-m4
-FLOAT=-mfloat-abi=hard
+FLOAT=-mfloat-abi=soft
 
 LINKER= -T Linkers/linker.ld
 MAP_FILE= -Wl,-Map=$(BUILD_DIR)/$(TARGET).map
@@ -12,7 +12,7 @@ BUILD_DIR= Build
 
 CFLAGS= -c $(MACH) -mthumb $(FLOAT) -std=gnu99 -Wall -O0 
 CPPFLAGS = -c $(MACH) -mthumb $(FLOAT) -Wall -O0
-LDFLAGS =  $(MACH) -mthumb $(FLOAT) --specs=nano.specs $(LINKER) $(MAP_FILE) -u _printf_float -Wl,--print-memory-usage
+LDFLAGS =  $(MACH) -mthumb $(FLOAT) --specs=nosys.specs --specs=nano.specs $(LINKER) $(MAP_FILE) -u _printf_float -Wl,--print-memory-usage
 OBJCOPY=arm-none-eabi-objcopy
 
 ###########################################
@@ -32,7 +32,7 @@ OBJS		+= $(BUILD_DIR)/startup.o
 DRIVERS		+= $(BUILD_DIR)/uart.o
 
 
-PREREQ = $(BUILD_DIR)/
+PREREQ = $(BUILD_DIR)
 
 all: $(PREREQ) $(BUILD_DIR)/$(TARGET).elf
 
@@ -49,7 +49,7 @@ $(BUILD_DIR)/%.o: Linkers/*.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(BUILD_DIR)/$(*).o Linkers/$(*).c
 
 $(BUILD_DIR)/$(TARGET).elf: $(OBJS) $(DRIVERS)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CPP) $(LDFLAGS) -o $@ $^
 	$(OBJCOPY) -O binary $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).bin
 	arm-none-eabi-size $(BUILD_DIR)/$(TARGET).elf
 

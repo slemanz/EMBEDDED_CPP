@@ -31,12 +31,12 @@ int main(void)
 
     // Calling member functions
     myCar.accelerate(50);
-    myCar.displayInfo(); // Output: Color: Red, Speed: 50 km/h
+    myCar.displayInfo();
 
     Car anotherCar; // Creating another object
     anotherCar.color = "Blue";
     anotherCar.speed = 20;
-    anotherCar.displayInfo(); // Output: Color: Blue, Speed: 20 km/h
+    anotherCar.displayInfo(); 
 
     while(1)
     {

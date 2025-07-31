@@ -1,5 +1,4 @@
 #include "uart.h"
-#include <stdio.h>
 
 void uart_init(void)
 {
@@ -16,6 +15,8 @@ void uart_init(void)
     UART2->CR2 = 0x000; // 1 stop bit
     UART2->CR3 = 0x000; // no flow control
     UART2->CR1 |= 0x2000; /*enable USART2*/
+
+    //setvbuf(stdout, NULL, _IONBF, 0);
 }
 
 int uart_write(int ch)
@@ -31,52 +32,11 @@ int uart_read(void)
     return UART2->DR;
 }
 
+extern "C" {
+
 extern int __io_putchar(int ch)
 {
-    uart_write((uint8_t)ch);
+    uart_write(ch);
     return ch;
 }
-
-/*
-namespace std{
-    struct __FILE{int handle;};
-
-    FILE __stdout;
-    FILE __stdin;
-    FILE __stderr;
-
-    int fgetc(FILE *f)
-    {
-        int c;
-        c = uart_read();
-        if(c == '\r')
-        {
-            uart_write(c);
-            c = '\n';
-        }
-        uart_write(c);
-        return c;
-    }
-
-    int fputc(int c, FILE *stream){
-        return uart_write(c);
-    }
-	 
-
-    long int ftell(FILE *stream){
-        return 1;
-    }
-
-    int fclose(FILE *f){
-        return 1;
-    }
-
-    int fseek(FILE *f, long nPos, int nMode){
-        return 0;
-    }
-    
-    int fflush(FILE *f){
-        return 1;
-    }
-};
-*/
+}
