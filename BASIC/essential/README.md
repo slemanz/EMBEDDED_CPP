@@ -139,7 +139,70 @@ T add(T a, T b)
 
 ### Default Arguments
 
+Allow specifying pre-defined values for function parameters in the function
+declaration. These values are automatically used if the caller of the function
+does not provide an explicit argument for that parameter.
 
+```cpp
+int  add_tripple(int a, int b, int c=0)
+{
+    return a+b+c;
+}
+```
+
+### Pass by Value
+
+When an argument is passed by value, a copy of the actual argument's value is
+made and passed to the function.  The function operates on this copy, meaning
+any modifications made to the parameter within the function do not affect the
+original variable in the calling scope.
+
+This method ensures data integrity of the original variable, as it remains unchanged.
+
+```cpp
+void incrementByValue(int num)
+{
+    num = num + 1; // Modifies the copy of 'num'
+}
+```
+
+### Pass by Reference
+
+When an argument is passed by reference, an alias (or reference) to the original
+variable is passed to the function.  The function's formal parameter directly
+refers to the same memory location as the original variable.  Any modifications
+made to the parameter within the function directly affect the original variable
+in the calling scope.
+
+This method allows functions to modify the original data,
+avoiding the overhead of copying large objects.
+
+```cpp
+void incrementByReference(int& num)
+{
+    num = num + 1; // Modifies the original 'num'
+}
+```
+
+### Pass by Address
+
+When an argument is passed by address, the memory address of the original
+variable is passed to the function.  The function's formal parameter is a
+pointer that stores this memory address.  To access or modify the original
+variable, the pointer must be dereferenced using the * operator.
+
+Similar to pass by reference, this method allows functions to modify the
+original data. It is often used when explicit pointer manipulation is required
+or when dealing with dynamic memory
+
+```cpp
+void incrementByAddress(int* numPtr)
+{
+    *numPtr = *numPtr + 1; // Dereferences the pointer to modify the original value
+}
+```
+
+### Return by Address
 
 
 ---
