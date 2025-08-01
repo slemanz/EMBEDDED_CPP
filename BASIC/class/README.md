@@ -119,7 +119,13 @@ int main()
 }
 ```
 
-**[Scope Resolution - Led Example](App/Src/scope.cpp)**
+Also used for defining member functions outside the class:
+
+- **[Scope Resolution - Led Hpp](App/Inc/led.hpp)**
+
+- **[Scope Resolution - Led Cpp](App/Src/led.cpp)**
+
+- **[Scope Resolution - Led Example](App/Src/scope.cpp)**
 
 ### this pointer
 
