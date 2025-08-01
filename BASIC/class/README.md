@@ -165,3 +165,54 @@ class MyClass
 ```
 
 ### Differences between Class and Struct
+
+In C++, the fundamental difference between a class and a struct lies in their
+default member access specifiers and default inheritance access.
+
+- Default Member Access:
+    - struct: Members (data and functions) declared within a struct are public by
+    default. This means they can be accessed directly from outside the struct or by
+    functions not part of the struct. 
+    - class: Members declared within a class are
+    private by default. This means they can only be accessed by other members of the
+    same class or by friend functions/classes.
+
+- Default Inheritance Access:
+    - struct: When one struct inherits from another struct
+    or class, the inheritance is public by default. 
+    - class: When one class inherits from another class or struct, the
+    inheritance is private by default.
+
+### The function Friend
+
+Is a non-member function that is granted special access to the private and
+protected members of a class. While typically private and protected members are
+only accessible by member functions of the class or its derived classes, a
+friend function bypasses this restriction. 
+
+```cpp
+class MyClass
+{
+    private:
+        int privateData;
+
+    public:
+        MyClass(int data) : privateData(data) {}
+
+        // Declare a friend function
+        friend void displayPrivateData(MyClass obj);
+};
+
+// Definition of the friend function
+void displayPrivateData(MyClass obj)
+{
+    printf("%d\n", obj.privateData); // Accessing privateData
+}
+
+int main()
+{
+    MyClass obj(100);
+    displayPrivateData(obj); // Call the friend function
+    return 0;
+}
+```
