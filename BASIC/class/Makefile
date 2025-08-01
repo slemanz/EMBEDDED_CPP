@@ -29,6 +29,8 @@ OBJS		+= $(BUILD_DIR)/main.o
 OBJS		+= $(BUILD_DIR)/syscalls.o
 OBJS		+= $(BUILD_DIR)/startup.o
 
+OBJS		+= $(BUILD_DIR)/led.o
+
 DRIVERS		+= $(BUILD_DIR)/uart.o
 
 
