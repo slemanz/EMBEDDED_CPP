@@ -295,3 +295,44 @@ int MyClass::count = 0; // Definition and initialization
 ```
 
 **[Static variable in class - Example](App/Src/static_variable.cpp)
+
+### Static Functions
+
+When applied to functions, it can refer to either static member functions within
+a class or static non-member functions (global functions with internal linkage).
+
+**Static Member Functions**
+
+- Belong to the Class, Not Objects:
+Static member functions are associated with the class itself, rather than with
+any specific object (instance) of that class. This means they can be called
+using the class name and the scope resolution operator (::), even without
+creating an object of the class. 
+
+- Access to Static Members: They can only directly access static data members
+and other static member functions of the same class. 
+
+Common Uses::
+Often used for utility functions that operate on class-level data or perform
+operations related to the class as a whole (e.g., managing a count of objects,
+providing factory methods).
+
+```cpp
+class MyClass
+{
+    public:
+        static int objectCount; // Static data member
+        static void incrementCount() // Static member function
+        { 
+            objectCount++;
+        }
+};
+int MyClass::objectCount = 0; // Definition of static data member
+
+int main() {
+    MyClass::incrementCount(); // Calling static member function
+    return 0;
+}
+```
+
+### Class Template
