@@ -336,3 +336,43 @@ int main() {
 ```
 
 ### Class Template
+
+A class template in C++ enables the creation of a single class definition that
+can operate with various data types without requiring the code to be rewritten
+for each specific type. This promotes code reusability and type safety.
+
+A class template is declared using the template keyword followed by template
+parameters enclosed in angle brackets (<>). These parameters typically represent
+type placeholders.
+
+```cpp
+template <class T>
+class MyClass
+{
+    public:
+        T data;
+        MyClass(T val) : data(val) {}
+        void printData()
+        {
+            // Code to print 'data'
+        }
+};
+```
+
+In C++ templates, there is no functional difference between using class and
+typename in the template parameter declaration. They are completely
+interchangeable in this context.
+
+```cpp
+template <class T>  // works
+template <typename T> // also works exactly the same way
+```
+
+Modern Convention:
+
+- Use typename when the template parameter can be any type (most common case)
+
+- Use class when you specifically want to emphasize that the parameter should be a
+class type (though the compiler won't enforce this)
+
+**[Class template](App/Src/class_template.cpp)**
