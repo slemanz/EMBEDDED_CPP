@@ -230,3 +230,28 @@ class Animal
 
 
 **[Polymorphism Pure Virtual - Example](App/Src/polymorphism_2.cpp)**
+
+### The Class Friend
+
+Is a class that is granted special permission to access the private and protected
+members of another class. This mechanism allows for controlled relaxation of
+encapsulation in specific scenarios where two classes are closely related and
+need direct access to each other's internal data or functionality. 
+
+```cpp
+class MyClass
+{
+    private:
+        int privateData;
+    public:
+        // Declare AnotherClass as a friend
+        friend class AnotherClass; 
+    };
+
+    class AnotherClass {
+    public:
+        void accessMyClassData(MyClass& obj) {
+            obj.privateData = 10; // Allowed because AnotherClass is a friend
+        }
+    };
+```
