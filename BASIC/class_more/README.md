@@ -141,3 +141,39 @@ class Dog : public Animal
         }
 };
 ```
+
+### Virtual Function
+
+Is a member function in a base class that is overridden in a
+derived class. It allows runtime polymorphism, meaning the correct function is
+called based on the actual object type, not the pointer/reference type.
+
+When a base class pointer or reference points to an object of a derived class,
+and a virtual function is called through that pointer or reference, C++
+determines which version of the function (base class or derived class) to
+execute at runtime based on the actual type of the object being pointed to. 
+
+
+```cpp
+// Base class
+class Animal
+{
+    public:
+        // Function to be overridden
+        virtual void speak()
+        {
+            printf("Animal makes a sound\n");
+        }
+};
+
+// Derived class
+class Dog : public Animal
+{
+    public:
+        // Overriding the speak() function
+        void speak()
+        {
+            printf("Dog barks: Woof!");
+        }
+};
+```
