@@ -65,5 +65,47 @@ encapsulation from external code.
 
 **[Access Specifiers - Example](App/Src/acessSpecifiers.cpp)**
 
+### Class Pointers
 
+A class pointer is a pointer variable specifically designed to store the memory
+address of an object (an instance) of a particular class. This allows for
+indirect access and manipulation of the object's members (data members and
+member functions).
 
+A class pointer is declared similarly to other pointers, using the class name
+followed by an asterisk (*). It is then initialized with the address of an
+existing object using the address-of operator (&).
+
+```cpp
+int main() {
+    MyClass obj;
+    MyClass* ptr;
+    ptr = &obj;
+}
+```
+
+The new operator is used to dynamically allocate memory for objects of a class
+on the heap.
+
+To create an object of ClassName on the heap and get a pointer to it, use the
+new operator followed by the class name and any constructor arguments.
+
+```cpp
+ClassName* pointerName = new ClassName(constructor_arguments);
+```
+
+To access members (data members or member functions) of the object pointed to by
+a class pointer, use the arrow operator (->)
+
+```cpp
+pointerName->memberVariable;
+pointerName->memberFunction();
+```
+
+Memory allocated with new must be explicitly deallocated using the delete
+operator to prevent memory leaks. This calls the object's destructor before
+releasing the memory.
+
+```cpp
+delete pointerName;
+```
