@@ -255,3 +255,43 @@ class MyClass
         }
     };
 ```
+
+### Static Variable
+
+In C++, the static keyword has different meanings depending on its context:
+
+**Static Local Variables:**
+
+- When declared inside a function, a static local variable retains its value
+between successive calls to that function. 
+- It is initialized only once, the first time the function is called, and exists
+for the entire duration of the program.
+
+**Static Global Variables (File Scope):**
+
+- When declared at global scope (outside any function) with the static keyword,
+the variable has internal linkage. 
+- This means it is only visible and accessible within the compilation unit (the
+.cpp file) where it is defined, and cannot be accessed from other files using
+extern.
+
+**Static Class Members (Data Members):**
+
+- When a data member of a class is declared static, it belongs to the class
+itself, not to any specific object of that class.
+- There is only one copy of a static data member, shared by all instances of the
+class.
+- It must be defined outside the class definition (at file scope) to allocate
+storage for it.
+
+```cpp
+class MyClass
+{
+    public:
+    static int count; // Declaration
+};
+
+int MyClass::count = 0; // Definition and initialization
+```
+
+**[Static variable in class - Example](App/Src/static_variable.cpp)
