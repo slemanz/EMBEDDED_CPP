@@ -177,3 +177,56 @@ class Dog : public Animal
         }
 };
 ```
+
+**[Virtual Function - Example](App/Src/virtual_function.cpp)**
+
+### Polymorphism
+
+Is a core principle of Object-Oriented Programming (OOP) that allows objects to
+Take on multiple forms or exhibit different behaviors based on their context.
+The word "polymorphism" itself means "many forms."
+
+Polymorphism is mainly achieved through:
+
+1. Function Overriding (with virtual functions)
+
+2. Pointers/References to Base Class
+
+In C++, polymorphism is Broadly categorized into two main types:
+
+**Compile-time Polymorphism (Static):**
+This type of polymorphism is resolved during the compilation
+Phase. 
+
+- Function overloading
+- Operator overloading
+- Templates
+
+**Runtime Polymorphism (Dynamic):**
+This type of polymorphism is resolved during program execution.
+
+- Virtual functions (as shown above)
+- Function overriding
+
+**[Polymorphism - Example](App/Src/polymorphism_1.cpp)**
+
+### Pure Virtual Functions and Polymorphism
+
+Is a virtual function that has no implementation in the base class and must be
+overridden by derived classes. A class containing at least one pure virtual
+function becomes an abstract class, which cannot be instantiated directly.
+
+```Cpp
+class Animal
+{
+    public:
+        // Pure virtual function (must be overridden)
+        virtual void speak() = 0;  // = 0 makes it pure virtual
+        
+        // Virtual destructor (still needed)
+        virtual ~Animal() {}
+};
+```
+
+
+**[Polymorphism Pure Virtual - Example](App/Src/polymorphism_2.cpp)**
