@@ -109,3 +109,35 @@ releasing the memory.
 ```cpp
 delete pointerName;
 ```
+
+### Function Overriding
+
+Is a core concept of object-oriented programming that allows a derived class to
+provide its own specific implementation of a function that is already defined
+in its base class. This mechanism is essential for achieving runtime
+polymorphism. 
+
+
+```cpp
+// Base class
+class Animal
+{
+    public:
+        // Function to be overridden
+        void speak()
+        {
+            printf("Animal makes a sound\n");
+        }
+};
+
+// Derived class
+class Dog : public Animal
+{
+    public:
+        // Overriding the speak() function
+        void speak()
+        {
+            printf("Dog barks: Woof!");
+        }
+};
+```
