@@ -428,3 +428,23 @@ A destructor has the same name as its class, preceded by a tilde (`~`). For
 example, for a class `MyClass`, its destructor would be `~MyClass().`
 
 **[Destructor - Example](App/Src/destructor.cpp)**
+
+### Virtual Destructor
+
+Is a destructor of a base class declared with the virtual keyword. Its primary
+purpose is to ensure proper destruction of objects in an inheritance hierarchy,
+especially when dealing with polymorphism. 
+
+When a derived class object is deleted through a pointer to its base class, if
+the base class destructor is not virtual, only the base class's destructor will
+be called. This can lead to resource leaks or undefined behavior if the derived
+class has its own resources that need to be deallocated by its specific
+destructor. 
+
+By making the base class destructor virtual, the C++ runtime ensures that the
+correct destructor (i.e., the destructor of the most derived class) is called
+first, followed by the destructors of its base classes in the correct order.
+This guarantees that all resources acquired by the derived class are properly
+released before the base class resources are deallocated.
+
+**[Virtual Destructors - Example](App/Src/destructors_virtual.cpp)**
