@@ -376,3 +376,45 @@ Modern Convention:
 class type (though the compiler won't enforce this)
 
 **[Class template](App/Src/class_template.cpp)**
+
+## Namespace
+
+Are declarative regions that provide a scope to identifiers (names of types,
+functions, variables, etc.) within them. Their primary purpose is to organize
+code into logical groups and, crucially, to prevent naming collisions,
+especially in large codebases or when incorporating multiple libraries.
+
+**Declaration and Usage:**
+
+Declaration
+
+```cpp
+namespace MyNamespace
+{
+    int myVariable;
+    void myFunction();
+}
+```
+
+Accessing Members
+
+```cpp
+MyNamespace::myVariable = 10;
+MyNamespace::myFunction();
+```
+
+Using Directive
+
+```cpp
+using namespace MyNamespace; // Brings all identifiers from MyNamespace into scope
+myVariable = 20; // Now directly accessible
+```
+
+Or, for specific identifiers
+
+```cpp
+using MyNamespace::myFunction; // Brings only myFunction into scope
+myFunction();
+```
+
+### Destructor
