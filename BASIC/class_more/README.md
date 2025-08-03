@@ -418,3 +418,13 @@ myFunction();
 ```
 
 ### Destructor
+
+Is a special member function of a class that is automatically invoked when an
+object of that class is destroyed or goes out of scope. Its primary purpose is
+to perform cleanup operations and release any resources acquired by the object
+during its lifetime. 
+
+A destructor has the same name as its class, preceded by a tilde (`~`). For
+example, for a class `MyClass`, its destructor would be `~MyClass().`
+
+**[Destructor - Example](App/Src/destructor.cpp)**
