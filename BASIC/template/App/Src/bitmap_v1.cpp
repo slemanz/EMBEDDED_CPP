@@ -40,8 +40,6 @@ typedef struct bit32_type
 
 int main(void)
 {
-    //uart_init();
-    //printf("Init the board!\n");
     std::uint32_t ahb1enr = mcal::reg::rcc::ahb1enr;
     std::uint32_t gpioa_m = mcal::reg::gpio::cfg_regs::gpioa_cfg::gpioa_moder;
     std::uint32_t gpioa_o = mcal::reg::gpio::cfg_regs::gpioa_cfg::gpioa_odr;
