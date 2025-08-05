@@ -5,66 +5,55 @@ namespace mcal
 {
     namespace reg
     {
-        template<   typename addr_type,
-                    typename reg_type,
-                    const addr_type addr,
-                    const reg_type val>
         class reg_access
         {
             public:
-                static void reg_set()
+                static void reg_set(uint32_t addr, uint32_t val)
                 {
-                    *reinterpret_cast<volatile addr_type*>(addr) = static_cast<reg_type>(val);
+                    *reinterpret_cast<volatile uint32_t*>(addr) = val;
                 }
 
-                static void reg_or()
+                static void reg_or(uint32_t addr, uint32_t val)
                 {
-                    *reinterpret_cast<volatile addr_type*>(addr) |= static_cast<reg_type>(val);
+                    *reinterpret_cast<volatile uint32_t*>(addr) |= (val);
                 }
 
-                static void reg_and()
+                static void reg_and(uint32_t addr, uint32_t val)
                 {
-                    *reinterpret_cast<volatile addr_type*>(addr) &= static_cast<reg_type>(val);
+                    *reinterpret_cast<volatile uint32_t*>(addr) &= val;
                 }
 
-                static void reg_not()
+                static void reg_not(uint32_t addr, uint32_t val)
                 {
-                    *reinterpret_cast<volatile addr_type*>(addr) &= static_cast<reg_type>(~val);
-                }
-						
-                static reg_type reg_get()
-                {
-                    return *reinterpret_cast<volatile addr_type*>(addr); 
-                }
-						
-                static void bit_set()
-                {
-					*reinterpret_cast<volatile addr_type*>(addr) |= static_cast<reg_type>(1U<<val);
-                }
-					
-                static void bit_clr()
-                {
-					*reinterpret_cast<volatile addr_type*>(addr) &= static_cast<reg_type>(~static_cast<reg_type>(1U<<val));
+                    *reinterpret_cast<volatile uint32_t*>(addr) &= ~val;
                 }
 
-                static void bit_not()
+                static uint32_t reg_get(uint32_t addr)
                 {
-				    *reinterpret_cast<volatile addr_type*>(addr) ^= static_cast<reg_type>(1U<<val);
-				}
-						
-				static bool bit_get()
-                {
-					return ((reg_get(addr)& static_cast<reg_type>(1U<<val)) != static_cast<reg_type>(0U));
-				}
-        };
+                    return *reinterpret_cast<volatile uint32_t*>(addr);
+                }
 
-        // Helper macros for register access
-        #define MCAL_REG_ACCESS(addr_type, reg_type, address) \
-            mcal::reg::reg_access<addr_type, reg_type, address, 0>
-            
-        #define MCAL_REG_BIT_ACCESS(addr_type, reg_type, address, bit_pos) \
-            mcal::reg::reg_access<addr_type, reg_type, address, bit_pos>
-    }
-}
+                static void bit_set(uint32_t addr, uint32_t val)
+                {
+                    *reinterpret_cast<volatile uint32_t*>(addr) |= (1U << val);
+                }
+
+                static void bit_clr(uint32_t addr, uint32_t val)
+                {
+                    *reinterpret_cast<volatile uint32_t*>(addr) &= ~(1U<<val);
+                }
+
+                static void bit_not(uint32_t addr, uint32_t val)
+                {
+                    *reinterpret_cast<volatile uint32_t*>(addr) ^= (1U << val);
+                }
+
+                static bool bit_get(uint32_t addr, uint32_t val)
+                {
+                    return ((reg_get(addr)& static_cast<uint32_t>(1U<<val)) != static_cast<uint32_t>(0U));
+                }
+            };
+    } // namespace reg
+} // namespace mcal
 
 #endif /* INC_MCAL_REG_ACCESS_HPP */
