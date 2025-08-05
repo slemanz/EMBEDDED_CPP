@@ -14,8 +14,7 @@ namespace driver
             B,
             C,
             D,
-            E,
-            H
+            E
         };
 
         enum class Mode : uint8_t
@@ -55,9 +54,51 @@ namespace driver
 
         class Pin
         {
+            public:
+                constexpr Pin(Port port, uint8_t pin_num) : port_(port), pin_(pin_num)
+                {
+                    //static_assert(sizeof(RegType) == 4, "Register type size mismatch");
+                }
 
-        }
-    }
-}
+                void configure( Mode mode,
+                                OutputType otype = OutputType::PushPull, 
+                                Speed speed = Speed::Low,
+                                Pull pull = Pull::None,
+                                uint8_t alternate = 0) const;
+
+                void set_mode(Mode mode) const;
+                void set_output_type(OutputType otype) const;
+                void set_speed(Speed speed) const;
+                void set_pull(Pull pull) const;
+                void set_alternate_function(uint8_t alternate) const;
+
+                void write(State state) const;
+                void toggle() const;
+                State read() const;
+
+
+            private:
+                Port port_;
+                uint8_t pin_;
+            
+                using RegType = uint32_t;
+
+                constexpr uint32_t get_port_base() const
+                {
+                    switch (port_)
+                    {
+                        case Port::A: return mcal::reg::gpioa_base;
+                        case Port::B: return mcal::reg::gpiob_base;
+                        case Port::C: return mcal::reg::gpioc_base;
+                        case Port::D: return mcal::reg::gpiod_base;
+                        case Port::E: return mcal::reg::gpioe_base;
+                        default: return 0;
+                    }
+                }
+
+                void enable_clock() const;
+        };
+    } // namespace gpio
+} // namespace driver
 
 #endif /* INC_DRIVER_GPIO_HPP */
