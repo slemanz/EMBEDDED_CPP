@@ -57,6 +57,13 @@ namespace mcal
 					return ((reg_get(addr)& static_cast<reg_type>(1U<<val)) != static_cast<reg_type>(0U));
 				}
         };
+
+        // Helper macros for register access
+        #define MCAL_REG_ACCESS(addr_type, reg_type, address) \
+            mcal::reg::reg_access<addr_type, reg_type, address, 0>
+            
+        #define MCAL_REG_BIT_ACCESS(addr_type, reg_type, address, bit_pos) \
+            mcal::reg::reg_access<addr_type, reg_type, address, bit_pos>
     }
 }
 
