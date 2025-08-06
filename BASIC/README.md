@@ -6,3 +6,4 @@
 4. **[More about Class](class_more/)**
 5. **[Template](template/)**
 6. **[GPIO](gpio/)**
+7. **[UART](uart/)**
