@@ -12,6 +12,8 @@ namespace mcal
         constexpr std::uint32_t periph_base = 0x40000000U;
 
         // Individual unit base addresses
+        constexpr std::uint32_t apb1periph_base = periph_base;
+        constexpr std::uint32_t apb2periph_base = periph_base + 0x00010000U;
         constexpr std::uint32_t ahb1periph_base = periph_base + 0x00020000U;
 
         constexpr std::uint32_t rcc_base        = ahb1periph_base + 0x00003800U;
@@ -25,6 +27,10 @@ namespace mcal
         constexpr std::uint32_t gpioc_base      = ahb1periph_base +  0x0800;
         constexpr std::uint32_t gpiod_base      = ahb1periph_base +  0x0C00;
         constexpr std::uint32_t gpioe_base      = ahb1periph_base +  0x1000;
+
+        constexpr std::uint32_t usart1_base     = apb2periph_base +  0x1000;
+        constexpr std::uint32_t usart2_base     = apb1periph_base +  0x4400;
+        constexpr std::uint32_t usart6_base     = apb2periph_base +  0x1400;
 
         
         // Port registers.
@@ -112,6 +118,18 @@ namespace mcal
             constexpr std::uint32_t afrl        = gpioe_base + gpio_offset::afrl;
             constexpr std::uint32_t afrh        = gpioe_base + gpio_offset::afrh;
         } // gpioe
+
+        // usart register offset
+        namespace usart_offset
+        {   
+            constexpr std::uint32_t sr          = 0x00;
+            constexpr std::uint32_t dr          = 0x04;
+            constexpr std::uint32_t brr         = 0x08;
+            constexpr std::uint32_t cr1         = 0x0C;
+            constexpr std::uint32_t cr2         = 0x10;
+            constexpr std::uint32_t cr3         = 0x14;
+            constexpr std::uint32_t gtpr        = 0x18;
+        } // usart_offset
     } // reg
 } // mcal
 
