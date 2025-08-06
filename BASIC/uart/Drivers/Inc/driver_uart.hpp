@@ -12,7 +12,7 @@ namespace driver
         {
             USART1,
             USART2,
-            USART3
+            USART6
         };
 
         enum class BaudRate : uint32_t 

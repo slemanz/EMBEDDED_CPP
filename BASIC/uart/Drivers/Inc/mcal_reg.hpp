@@ -20,7 +20,8 @@ namespace mcal
       
         constexpr std::uint32_t ahb1enr =	rcc_base + 0x30;
         constexpr std::uint32_t ahb2enr =	rcc_base + 0x34;
-        constexpr std::uint32_t ahb3enr =	rcc_base + 0x38;
+        constexpr std::uint32_t apb1enr =	rcc_base + 0x40;
+        constexpr std::uint32_t apb2enr =	rcc_base + 0x44;
       
         constexpr std::uint32_t gpioa_base      = ahb1periph_base +  0x0000;
         constexpr std::uint32_t gpiob_base      = ahb1periph_base +  0x0400;
@@ -47,77 +48,6 @@ namespace mcal
             constexpr std::uint32_t afrl        = 0x20;  
             constexpr std::uint32_t afrh        = 0x24;  
         } // gpio_offset
-
-        // GPIO Register addresses
-        namespace gpioa
-        {
-            constexpr std::uint32_t moder       = gpioa_base + gpio_offset::moder;
-            constexpr std::uint32_t otyper      = gpioa_base + gpio_offset::otyper;
-            constexpr std::uint32_t ospeedr     = gpioa_base + gpio_offset::ospeedr;
-            constexpr std::uint32_t pupdr       = gpioa_base + gpio_offset::pupdr;
-            constexpr std::uint32_t idr         = gpioa_base + gpio_offset::idr;
-            constexpr std::uint32_t odr         = gpioa_base + gpio_offset::odr;
-            constexpr std::uint32_t bsrr        = gpioa_base + gpio_offset::bsrr;
-            constexpr std::uint32_t lckr        = gpioa_base + gpio_offset::lckr;
-            constexpr std::uint32_t afrl        = gpioa_base + gpio_offset::afrl;
-            constexpr std::uint32_t afrh        = gpioa_base + gpio_offset::afrh;
-        } // gpioa
-
-        namespace gpiob
-        {
-            constexpr std::uint32_t moder       = gpiob_base + gpio_offset::moder;
-            constexpr std::uint32_t otyper      = gpiob_base + gpio_offset::otyper;
-            constexpr std::uint32_t ospeedr     = gpiob_base + gpio_offset::ospeedr;
-            constexpr std::uint32_t pupdr       = gpiob_base + gpio_offset::pupdr;
-            constexpr std::uint32_t idr         = gpiob_base + gpio_offset::idr;
-            constexpr std::uint32_t odr         = gpiob_base + gpio_offset::odr;
-            constexpr std::uint32_t bsrr        = gpiob_base + gpio_offset::bsrr;
-            constexpr std::uint32_t lckr        = gpiob_base + gpio_offset::lckr;
-            constexpr std::uint32_t afrl        = gpiob_base + gpio_offset::afrl;
-            constexpr std::uint32_t afrh        = gpiob_base + gpio_offset::afrh;
-        } // gpiob
-
-        namespace gpioc
-        {
-            constexpr std::uint32_t moder       = gpioc_base + gpio_offset::moder;
-            constexpr std::uint32_t otyper      = gpioc_base + gpio_offset::otyper;
-            constexpr std::uint32_t ospeedr     = gpioc_base + gpio_offset::ospeedr;
-            constexpr std::uint32_t pupdr       = gpioc_base + gpio_offset::pupdr;
-            constexpr std::uint32_t idr         = gpioc_base + gpio_offset::idr;
-            constexpr std::uint32_t odr         = gpioc_base + gpio_offset::odr;
-            constexpr std::uint32_t bsrr        = gpioc_base + gpio_offset::bsrr;
-            constexpr std::uint32_t lckr        = gpioc_base + gpio_offset::lckr;
-            constexpr std::uint32_t afrl        = gpioc_base + gpio_offset::afrl;
-            constexpr std::uint32_t afrh        = gpioc_base + gpio_offset::afrh;
-        } // gpioc
-
-        namespace gpiod
-        {
-            constexpr std::uint32_t moder       = gpiod_base + gpio_offset::moder;
-            constexpr std::uint32_t otyper      = gpiod_base + gpio_offset::otyper;
-            constexpr std::uint32_t ospeedr     = gpiod_base + gpio_offset::ospeedr;
-            constexpr std::uint32_t pupdr       = gpiod_base + gpio_offset::pupdr;
-            constexpr std::uint32_t idr         = gpiod_base + gpio_offset::idr;
-            constexpr std::uint32_t odr         = gpiod_base + gpio_offset::odr;
-            constexpr std::uint32_t bsrr        = gpiod_base + gpio_offset::bsrr;
-            constexpr std::uint32_t lckr        = gpiod_base + gpio_offset::lckr;
-            constexpr std::uint32_t afrl        = gpiod_base + gpio_offset::afrl;
-            constexpr std::uint32_t afrh        = gpiod_base + gpio_offset::afrh;
-        } // gpiod
-
-        namespace gpioe
-        {
-            constexpr std::uint32_t moder       = gpioe_base + gpio_offset::moder;
-            constexpr std::uint32_t otyper      = gpioe_base + gpio_offset::otyper;
-            constexpr std::uint32_t ospeedr     = gpioe_base + gpio_offset::ospeedr;
-            constexpr std::uint32_t pupdr       = gpioe_base + gpio_offset::pupdr;
-            constexpr std::uint32_t idr         = gpioe_base + gpio_offset::idr;
-            constexpr std::uint32_t odr         = gpioe_base + gpio_offset::odr;
-            constexpr std::uint32_t bsrr        = gpioe_base + gpio_offset::bsrr;
-            constexpr std::uint32_t lckr        = gpioe_base + gpio_offset::lckr;
-            constexpr std::uint32_t afrl        = gpioe_base + gpio_offset::afrl;
-            constexpr std::uint32_t afrh        = gpioe_base + gpio_offset::afrh;
-        } // gpioe
 
         // usart register offset
         namespace usart_offset
