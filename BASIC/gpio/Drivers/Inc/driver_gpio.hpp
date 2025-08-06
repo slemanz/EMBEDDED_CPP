@@ -55,8 +55,9 @@ namespace driver
         class Pin
         {
             public:
-                constexpr Pin(Port port, uint8_t pin_num) : port_(port), pin_(pin_num)
+                Pin(Port port, uint8_t pin_num) : pin_(pin_num)
                 {
+                    port_ = get_port_base(port);
                     //static_assert(sizeof(RegType) == 4, "Register type size mismatch");
                 }
 
@@ -78,14 +79,14 @@ namespace driver
 
 
             private:
-                Port port_;
+                uint32_t port_;
                 uint8_t pin_;
             
                 using RegType = uint32_t;
 
-                constexpr uint32_t get_port_base() const
+                constexpr uint32_t get_port_base(Port port) const
                 {
-                    switch (port_)
+                    switch (port)
                     {
                         case Port::A: return mcal::reg::gpioa_base;
                         case Port::B: return mcal::reg::gpiob_base;

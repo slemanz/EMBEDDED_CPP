@@ -50,7 +50,7 @@ namespace mcal
 
                 static bool bit_get(uint32_t addr, uint32_t val)
                 {
-                    return ((reg_get(addr)& static_cast<uint32_t>(1U<<val)) != static_cast<uint32_t>(0U));
+                    return ((reg_get(addr) & static_cast<uint32_t>(1U<<val)) != (0U));
                 }
             };
     } // namespace reg
