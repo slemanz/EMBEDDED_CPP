@@ -61,8 +61,8 @@ namespace driver
                             StopBits stop_bits = StopBits::One,
                             Parity parity = Parity::None) const;
 
-                void enable();
-                void disable();
+                void enable() const;
+                void disable() const;
 
                 bool is_data_avalable() const;
                 uint8_t read() const;
