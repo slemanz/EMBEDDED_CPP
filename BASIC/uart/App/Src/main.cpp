@@ -1,5 +1,6 @@
 #include "driver_gpio.hpp"
 #include "driver_uart.hpp"
+#include <cstring>
 
 using namespace driver;
 
@@ -26,24 +27,20 @@ int main(void)
     serial.init(uart::BaudRate::BR_9600, uart::Mode::TxRx);
     
     for(uint32_t i = 0; i < 200000; i++); // delay to stable pins
-    
+
     const char* msg = "Hello UART!\n";
-    for(const char* p = msg; *p; ++p)
-    {
-        while(!serial.is_ready_to_write());
-        serial.write(*p);
-    }
-    
-    
-    
+    serial.write(reinterpret_cast<uint8_t*>(const_cast<char*>(msg)), strlen(msg));
+
+    const char* msg2 = "Hello with strlen!\n";
+    serial.write(reinterpret_cast<uint8_t*>(const_cast<char*>(msg2)), strlen(msg2));
     
     while(1)
     {
         if(serial.is_data_available())
         {
-            uint8_t data = serial.read();
+            uint8_t data = serial.read_byte();
             while(!serial.is_ready_to_write());
-            serial.write(data);
+            serial.write_byte(data);
         }
     }
 }

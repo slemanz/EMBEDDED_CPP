@@ -65,10 +65,12 @@ namespace driver
                 void disable() const;
 
                 bool is_data_available() const;
-                uint8_t read() const;
+                uint8_t read_byte() const;
+                void read(uint8_t *data, uint32_t Len) const;
 
                 bool is_ready_to_write() const;
-                void write(uint8_t data) const;
+                void write_byte(uint8_t data) const;
+                void write(uint8_t *data, uint32_t Len) const;
 
                 void enable_interrupt(uint32_t priority = 0) const;
                 void disable_interrupt() const;

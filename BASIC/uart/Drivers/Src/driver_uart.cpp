@@ -48,10 +48,19 @@ bool Uart::is_data_available() const
     return reg_access::bit_get(sr_addr, reg::usart::bitpos::sr::rxne);
 }
 
-uint8_t Uart::read() const
+uint8_t Uart::read_byte() const
 {
     const uint32_t dr_addr = get_base_address() + reg::usart::offset::dr;
     return static_cast<uint8_t>(reg_access::reg_get(dr_addr));
+}
+
+void Uart::read(uint8_t *data, uint32_t Len) const
+{
+    for(uint32_t i = 0; i < Len; i++)
+    {
+        while(!is_data_available());
+        *(data++) = read_byte();
+    }
 }
 
 bool Uart::is_ready_to_write() const
@@ -60,11 +69,21 @@ bool Uart::is_ready_to_write() const
     return reg_access::bit_get(sr_addr, reg::usart::bitpos::sr::txe);
 }
 
-void Uart::write(uint8_t data) const
+void Uart::write_byte(uint8_t data) const
 {
     const uint32_t dr_addr = get_base_address() + reg::usart::offset::dr;
     reg_access::reg_set(dr_addr, static_cast<uint32_t>(data));
 }
+
+void Uart::write(uint8_t *data, uint32_t Len) const
+{
+    for(uint32_t i = 0; i < Len; i++)
+    {
+        while(!is_ready_to_write());
+        write_byte(*data++);
+    }
+}
+
 
 void Uart::enable() const
 {
