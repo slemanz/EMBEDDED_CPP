@@ -40,19 +40,30 @@ namespace mcal
 
         
         // Port registers.
-        namespace gpio_offset
+        namespace gpio
         {
-            constexpr std::uint32_t moder       = 0x00;
-            constexpr std::uint32_t otyper      = 0x04;
-            constexpr std::uint32_t ospeedr     = 0x08;
-            constexpr std::uint32_t pupdr       = 0x0C;  
-            constexpr std::uint32_t idr         = 0x10;  
-            constexpr std::uint32_t odr         = 0x14;  
-            constexpr std::uint32_t bsrr        = 0x18;  
-            constexpr std::uint32_t lckr        = 0x1C;  
-            constexpr std::uint32_t afrl        = 0x20;  
-            constexpr std::uint32_t afrh        = 0x24;  
-        } // gpio_offset
+            namespace offset
+            {
+                constexpr std::uint32_t moder       = 0x00;
+                constexpr std::uint32_t otyper      = 0x04;
+                constexpr std::uint32_t ospeedr     = 0x08;
+                constexpr std::uint32_t pupdr       = 0x0C;  
+                constexpr std::uint32_t idr         = 0x10;  
+                constexpr std::uint32_t odr         = 0x14;  
+                constexpr std::uint32_t bsrr        = 0x18;  
+                constexpr std::uint32_t lckr        = 0x1C;  
+                constexpr std::uint32_t afrl        = 0x20;  
+                constexpr std::uint32_t afrh        = 0x24;  
+            } // offset
+
+            namespace altfn
+            {
+                constexpr uint8_t pa2_usart2_tx = 7U;
+                constexpr uint8_t pa3_usart2_rx = 7U;
+            } // namespace altfn
+
+        } // namespace gpio
+
 
 
         namespace usart
