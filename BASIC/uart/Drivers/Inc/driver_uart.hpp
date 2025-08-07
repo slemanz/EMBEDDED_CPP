@@ -64,7 +64,7 @@ namespace driver
                 void enable() const;
                 void disable() const;
 
-                bool is_data_avalable() const;
+                bool is_data_available() const;
                 uint8_t read() const;
 
                 bool is_ready_to_write() const;

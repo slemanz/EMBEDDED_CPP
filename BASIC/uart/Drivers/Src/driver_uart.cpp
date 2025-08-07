@@ -42,7 +42,7 @@ void Uart::init(BaudRate baudrate, Mode mode, WordLength word_length,
     enable();
 }
 
-bool Uart::is_data_avalable() const
+bool Uart::is_data_available() const
 {
     const uint32_t sr_addr = get_base_address() + reg::usart::offset::sr;
     return reg_access::bit_get(sr_addr, reg::usart::bitpos::sr::rxne);
