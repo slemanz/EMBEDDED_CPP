@@ -80,8 +80,6 @@ namespace driver
                 void enable_interrupt(Interrupt interrupt) const;
                 void disable_interrupt(Interrupt interrupt) const;
 
-                static void handle_interrupt(Instance instance);
-
             private:
                 Instance instance_;
                 constexpr uint32_t get_base_address() const;
