@@ -97,6 +97,18 @@ void Uart::disable() const
     reg_access::reg_not(cr1_addr, reg::usart::mask::cr1::ue);
 }
 
+void Uart::enable_interrupt(Interrupt interrupt) const
+{
+    const uint32_t cr1_addr = get_base_address() + reg::usart::offset::cr1;
+    reg_access::bit_set(cr1_addr, static_cast<uint32_t>(interrupt));
+}
+
+void Uart::disable_interrupt(Interrupt interrupt) const
+{
+    const uint32_t cr1_addr = get_base_address() + reg::usart::offset::cr1;
+    reg_access::bit_clr(cr1_addr, static_cast<uint32_t>(interrupt));
+}
+
 /*
  * OTHER METHODS
  */

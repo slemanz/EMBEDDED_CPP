@@ -50,6 +50,11 @@ namespace driver
             TxRx = 3
         };
 
+        enum class Interrupt : uint8_t
+        {
+            RXNEIE = 5
+        };
+
         class Uart
         {
             public:
@@ -72,8 +77,8 @@ namespace driver
                 void write_byte(uint8_t data) const;
                 void write(uint8_t *data, uint32_t Len) const;
 
-                void enable_interrupt(uint32_t priority = 0) const;
-                void disable_interrupt() const;
+                void enable_interrupt(Interrupt interrupt) const;
+                void disable_interrupt(Interrupt interrupt) const;
 
                 static void handle_interrupt(Instance instance);
 
