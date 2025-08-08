@@ -18,12 +18,13 @@ namespace driver
                 static void enable_interrupt();
                 static void disable_interrupt();
 
-                static uint64_t ticks_increment();
+                static void ticks_increment();
                 static uint64_t ticks_get();
                 static void delay_ms(uint64_t milliseconds);
             
             private:
-                uint64_t ticks_;
+                static uint64_t ticks_;
+                static uint64_t ticks_p_;
         };
     } // namespace systick
 } // namespace driver

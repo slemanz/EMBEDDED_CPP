@@ -248,13 +248,27 @@ namespace mcal
                 constexpr std::uint32_t calib       = 0x0C;
             }
             
-            namespace ctrl
+            namespace bitpos
             {
-                constexpr std::uint32_t enable      = (1U << 0);
-                constexpr std::uint32_t tickint     = (1U << 1);
-                constexpr std::uint32_t clksource   = (1U << 2);
-                constexpr std::uint32_t countflag   = (1U << 16);
-            }
+                namespace ctrl
+                {
+                    constexpr std::uint32_t enable      = 0;
+                    constexpr std::uint32_t tickint     = 1;
+                    constexpr std::uint32_t clksource   = 2;
+                    constexpr std::uint32_t countflag   = 16;
+                }
+            } // namespace bitpos
+
+            namespace mask
+            {
+                namespace ctrl
+                {
+                    constexpr std::uint32_t enable      = (1U << bitpos::ctrl::enable);
+                    constexpr std::uint32_t tickint     = (1U << bitpos::ctrl::tickint);
+                    constexpr std::uint32_t clksource   = (1U << bitpos::ctrl::clksource);
+                    constexpr std::uint32_t countflag   = (1U << bitpos::ctrl::countflag);
+                }
+            } // namespace mask
         } // namespace systick
 
     } // reg
