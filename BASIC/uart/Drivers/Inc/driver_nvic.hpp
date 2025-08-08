@@ -10,8 +10,6 @@ namespace driver
         class Nvic
         {
             public:
-                static void set_priority_grouping(mcal::reg::nvic::PriorityGroup group);
-
                 template <mcal::reg::nvic::Irq irq>
                 static void enable_irq()
                 {
@@ -45,6 +43,9 @@ namespace driver
                     const std::uint32_t priority = (preempt_prio << 1) | sub_prio;
                     mcal::reg_access::reg_or(mcal::reg::nvic_base + reg_offset, (priority << shift));
                 }
+
+                static void global_enable_interrupts();
+                static void global_disable_interrupts();
         };
     } // namespace nvic
 } // namespace driver
