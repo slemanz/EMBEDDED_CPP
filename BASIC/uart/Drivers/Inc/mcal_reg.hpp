@@ -27,6 +27,8 @@ namespace mcal
         constexpr std::uint32_t ahb2enr =	rcc_base + 0x34;
         constexpr std::uint32_t apb1enr =	rcc_base + 0x40;
         constexpr std::uint32_t apb2enr =	rcc_base + 0x44;
+
+        constexpr std::uint32_t nvic_base       = 0xE000E100;
       
         constexpr std::uint32_t gpioa_base      = ahb1periph_base +  0x0000;
         constexpr std::uint32_t gpiob_base      = ahb1periph_base +  0x0400;
@@ -149,6 +151,91 @@ namespace mcal
                 } // namespace sr
             } // namespace mask
         } // namespace uart
+
+        namespace nvic
+        {
+            // NVIC register offsets
+            namespace offset
+            {
+                constexpr std::uint32_t iser = 0x000; // Interrupt Set Enable Register
+                constexpr std::uint32_t icer = 0x080; // Interrupt Clear Enable Register
+                constexpr std::uint32_t ispr = 0x100; // Interrupt Set Pending Register
+                constexpr std::uint32_t icpr = 0x180; // Interrupt Clear Pending Register
+                constexpr std::uint32_t iabr = 0x200; // Interrupt Active Bit Register
+                constexpr std::uint32_t ipr = 0x300;  // Interrupt Priority Register
+            } // namespace oofset
+
+            // Interrupt numbers for STM32F401
+            enum class Irq : std::uint8_t
+            {
+                WWDG                = 0,
+                PVD                 = 1,
+                TAMP_STAMP          = 2,
+                RTC_SKUP            = 3,
+                FLASH               = 4,
+                RCC                 = 5,
+                EXTI0               = 6,
+                EXTI1               = 7,
+                EXTI2               = 8,
+                EXTI3               = 9,
+                EXTI4               = 10,
+                DMA1_Stream0        = 11,
+                DMA1_Stream1        = 12,
+                DMA1_Stream2        = 13,
+                DMA1_Stream3        = 14,
+                DMA1_Stream4        = 15,
+                DMA1_Stream5        = 16,
+                DMA1_Stream6        = 17,
+                ADC                 = 18,
+                EXTI_9_5            = 23,
+                TIM1_BRK_TIM9       = 24,
+                TIM1_UP_TIM10       = 25,
+                TIM1_TRG_COM_TIM11  = 26,
+                TIM1_CC             = 27,
+                TIM2                = 28,
+                TIM3                = 29,
+                TIM4                = 30,
+                I2C1_EV             = 31,
+                I2C1_ER             = 32,
+                I2C2_EV             = 33,
+                I2C2_ER             = 34,
+                SPI1                = 35,
+                SPI2                = 36,
+                USART1              = 37,
+                USART2              = 38,
+                EXTI15_10           = 40,
+                RTC_Alarm           = 41,
+                OTG_FS_WKUP         = 42,
+                DMA1_Stream7        = 47,
+                SDIO                = 49,
+                TIM5                = 50,
+                SPI3                = 51,
+                DMA2_Stream0        = 56,
+                DMA2_Stream1        = 57,
+                DMA2_Stream2        = 58,
+                DMA2_Stream3        = 59,
+                DMA2_Stream4        = 60,
+                OTG_FS              = 67,
+                DMA2_Stream5        = 68,
+                DMA2_Stream6        = 69,
+                DMA2_Stream7        = 70,
+                USART6              = 71,
+                I2C3_EV             = 72,
+                I2C3_ER             = 73,
+                FPU                 = 81,
+                SPI4                = 84
+            };
+
+            // Priority grouping configuration
+            enum class PriorityGroup : std::uint8_t
+            {
+                Group4 = 3, // 4 bits for preemption, 0 bits for subpriority
+                Group3 = 4, // 3 bits for preemption, 1 bit for subpriority
+                Group2 = 5, // 2 bits for preemption, 2 bits for subpriority
+                Group1 = 6, // 1 bit  for preemption, 3 bits for subpriority
+                Group0 = 7  // 0 bits for preemption, 4 bits for subpriority
+            };
+        } // namespace nvic
 
     } // reg
 } // mcal
