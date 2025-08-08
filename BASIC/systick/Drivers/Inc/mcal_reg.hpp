@@ -28,6 +28,7 @@ namespace mcal
         constexpr std::uint32_t apb1enr =	rcc_base + 0x40;
         constexpr std::uint32_t apb2enr =	rcc_base + 0x44;
 
+        constexpr std::uint32_t systick_base    = 0xE000E010;
         constexpr std::uint32_t nvic_base       = 0xE000E100;
       
         constexpr std::uint32_t gpioa_base      = ahb1periph_base +  0x0000;
@@ -236,6 +237,25 @@ namespace mcal
                 Group0 = 7  // 0 bits for preemption, 4 bits for subpriority
             };
         } // namespace nvic
+
+        namespace systick
+        {
+            namespace offset
+            {
+                constexpr std::uint32_t ctrl        = 0x00;
+                constexpr std::uint32_t load        = 0x04;
+                constexpr std::uint32_t val         = 0x08;
+                constexpr std::uint32_t calib       = 0x0C;
+            }
+            
+            namespace ctrl
+            {
+                constexpr std::uint32_t enable      = (1U << 0);
+                constexpr std::uint32_t tickint     = (1U << 1);
+                constexpr std::uint32_t clksource   = (1U << 2);
+                constexpr std::uint32_t countflag   = (1U << 16);
+            }
+        } // namespace systick
 
     } // reg
 } // mcal
