@@ -80,18 +80,18 @@ namespace driver
                 constexpr Adc(Instance instance) : instance_(instance) {}
 
                 void init(  Resolution resolution,
-                            SampleTime default_sample_time = SampleTime::Cycles56);
+                            SampleTime default_sample_time = SampleTime::Cycles56) const;
 
                 void configure_channel( Channel channel,
                                         SampleTime sample_time,
-                                        bool enable = true);
+                                        bool enable = true) const;
 
                 void set_mode(  Mode mode,
                                 Trigger trigger = Trigger::Software,
-                                uint8_t discontinuous_count = 0);
+                                uint8_t discontinuous_count = 0) const;
 
-                void start_conversion();
-                void stop_conversion();
+                void start_conversion() const;
+                void stop_conversion() const;
 
                 bool is_conversion_complete() const;
                 uint16_t read_conversion_result() const;
