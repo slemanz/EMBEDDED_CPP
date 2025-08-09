@@ -14,10 +14,8 @@ namespace driver
 
         enum class Mode : std::uint8_t
         {
-            Single,
-            Continuous,
-            Scan,
-            Discontinuous
+            Single = 0U,
+            Continuous = 1U
         };
         enum class Trigger : std::uint8_t
         {
@@ -83,12 +81,10 @@ namespace driver
                             SampleTime default_sample_time = SampleTime::Cycles56) const;
 
                 void configure_channel( Channel channel,
-                                        SampleTime sample_time,
+                                        SampleTime sample_time = SampleTime::Cycles56,
                                         bool enable = true) const;
 
-                void set_mode(  Mode mode,
-                                Trigger trigger = Trigger::Software,
-                                uint8_t discontinuous_count = 0) const;
+                void set_mode(Mode mode) const;
 
                 void start_conversion() const;
                 void stop_conversion() const;

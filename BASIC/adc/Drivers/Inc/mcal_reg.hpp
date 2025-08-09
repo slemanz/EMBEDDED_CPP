@@ -325,7 +325,7 @@ namespace mcal
                     constexpr std::uint32_t cont        = 1;
                     constexpr std::uint32_t dma         = 8;
                     constexpr std::uint32_t align       = 11;
-                    constexpr std::uint32_t swstart     = 20;
+                    constexpr std::uint32_t swstart     = 30;
                 }
 
                 namespace sr
