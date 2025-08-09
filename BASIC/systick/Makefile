@@ -26,6 +26,7 @@ INCLUDES+= -I Drivers/Inc/
 # 				OUTPUT FILES
 
 OBJS		+= $(BUILD_DIR)/main.o
+OBJS		+= $(BUILD_DIR)/config.o
 OBJS		+= $(BUILD_DIR)/syscalls.o
 OBJS		+= $(BUILD_DIR)/startup.o
 
