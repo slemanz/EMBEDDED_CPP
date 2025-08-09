@@ -12,6 +12,12 @@ void config_drivers()
 {
     pa5.configure(gpio::Mode::Output);
 
+    gpio::Pin pa1(gpio::Port::A, 1);
+    pa1.configure(  gpio::Mode::Analog,
+                    gpio::OutputType::PushPull,
+                    gpio::Speed::High,
+                    gpio::Pull::None);
+
     gpio::Pin pa2(gpio::Port::A, 2);
     pa2.configure(  gpio::Mode::Alternate,
                     gpio::OutputType::PushPull,
