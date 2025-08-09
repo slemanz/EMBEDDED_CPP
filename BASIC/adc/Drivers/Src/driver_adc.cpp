@@ -3,7 +3,7 @@
 using namespace driver::adc;
 using namespace mcal;
 
-void Adc::init(Resolution resolution, SampleTime default_sample_time)
+void Adc::init(Resolution resolution, SampleTime default_sample_time) const
 {
     enable_clock();
     //calibrate();
@@ -42,33 +42,64 @@ void Adc::init(Resolution resolution, SampleTime default_sample_time)
         static_cast<uint32_t>(default_sample_time) << 24 |
         static_cast<uint32_t>(default_sample_time) << 27);
 }
-void Adc::configure_channel(Channel channel, SampleTime sample_time, bool enable = true) const
+void Adc::configure_channel(Channel channel, SampleTime sample_time, bool enable) const
 {
+    const uint32_t base = get_base_address();
 
+    /*
+    if(channel < Channel::Ch10)
+    {
+        const uint32_t shift = static_cast<uint32_t>(channel) * 3;
+        reg_access::reg_not(base + reg::adc::offset::smpr2, (7 << shift));
+        reg_access::reg_or(base + reg::adc::offset::smpr2, ( static_cast<uint32_t>(sample_time) << shift));
+    }else
+    {
+        const uint32_t shift = (static_cast<uint32_t>(channel)-10) * 3;
+        reg_access::reg_not(base + reg::adc::offset::smpr1, (7 << shift));
+        reg_access::reg_or(base + reg::adc::offset::smpr1, ( static_cast<uint32_t>(sample_time) << shift));
+    }*/
+
+    // Configure sequence (simple single channel mode)
+    if(enable)
+    {
+        reg_access::reg_set(base + reg::adc::offset::sqr3, static_cast<uint32_t>(channel));
+        reg_access::reg_set(base + reg::adc::offset::sqr1, 0); // seq len to 0
+    }
 }
 
-void Adc::set_mode(Mode mode, Trigger trigger = Trigger::Software, uint8_t discontinuous_count = 0) const
+void Adc::set_mode(Mode mode) const
 {
-
+    const uint32_t base = get_base_address();
+    if(mode == Mode::Single)
+    {
+        reg_access::bit_clr(base + reg::adc::offset::cr2, reg::adc::bitpos::cr2::cont);
+    }else
+    {
+        reg_access::bit_set(base + reg::adc::offset::cr2, reg::adc::bitpos::cr2::cont);
+    }
 }
 
 void Adc::start_conversion() const
 {
-
+    const uint32_t base = get_base_address();
+    reg_access::bit_set(base + reg::adc::offset::cr2, reg::adc::bitpos::cr2::swstart);
 }
 void Adc::stop_conversion() const
 {
-
+    const uint32_t base = get_base_address();
+    reg_access::bit_clr(base + reg::adc::offset::cr2, reg::adc::bitpos::cr2::swstart);
 }
 
 bool Adc::is_conversion_complete() const
 {
-
+    const uint32_t base = get_base_address();
+    return (reg_access::bit_get(base + reg::adc::offset::sr, reg::adc::bitpos::sr::eoc));
 }
 
 uint16_t Adc::read_conversion_result() const
 {
-
+    const uint32_t base = get_base_address();
+    return static_cast<uint16_t>(reg_access::reg_get(base + reg::adc::offset::dr));
 }
 
 /*
