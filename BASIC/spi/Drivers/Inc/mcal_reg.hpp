@@ -412,7 +412,7 @@ namespace mcal
                     constexpr std::uint32_t ssi         = 8U;
                     constexpr std::uint32_t ssm         = 9U;
                     constexpr std::uint32_t rxonly      = 10U;
-                    constexpr std::uint32_t crcl        = 11U;
+                    constexpr std::uint32_t dff         = 11U;
                     constexpr std::uint32_t crcnext     = 12U;
                     constexpr std::uint32_t crcen       = 13U;
                     constexpr std::uint32_t bidioe      = 14U;
@@ -440,13 +440,13 @@ namespace mcal
                     constexpr std::uint32_t cpha        = (1U << bitpos::cr1::cpha);
                     constexpr std::uint32_t cpol        = (1U << bitpos::cr1::cpol);
                     constexpr std::uint32_t mstr        = (1U << bitpos::cr1::mstr);
-                    constexpr std::uint32_t br          = (1U << bitpos::cr1::br);
+                    constexpr std::uint32_t br          = (7U << bitpos::cr1::br);
                     constexpr std::uint32_t spe         = (1U << bitpos::cr1::spe);
                     constexpr std::uint32_t lsbfirst    = (1U << bitpos::cr1::lsbfirst);
                     constexpr std::uint32_t ssi         = (1U << bitpos::cr1::ssi);
                     constexpr std::uint32_t ssm         = (1U << bitpos::cr1::ssm);
                     constexpr std::uint32_t rxonly      = (1U << bitpos::cr1::rxonly);
-                    constexpr std::uint32_t crcl        = (1U << bitpos::cr1::crcl);
+                    constexpr std::uint32_t dff         = (1U << bitpos::cr1::dff);
                     constexpr std::uint32_t crcnext     = (1U << bitpos::cr1::crcnext);
                     constexpr std::uint32_t crcen       = (1U << bitpos::cr1::crcen);
                     constexpr std::uint32_t bidioe      = (1U << bitpos::cr1::bidioe);
