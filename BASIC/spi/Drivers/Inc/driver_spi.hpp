@@ -70,6 +70,8 @@ namespace driver
             private:
                 Instance instance_;
                 constexpr uint32_t get_base_address() const;
+                void enable_clock() const;
+                void disable_clock() const;
         };
     } // namespace driver
 } // namespace driver
