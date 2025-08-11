@@ -35,6 +35,7 @@ DRIVERS		+= $(BUILD_DIR)/driver_nvic.o
 DRIVERS		+= $(BUILD_DIR)/driver_gpio.o
 DRIVERS		+= $(BUILD_DIR)/driver_uart.o
 DRIVERS		+= $(BUILD_DIR)/driver_adc.o
+DRIVERS		+= $(BUILD_DIR)/driver_spi.o
 
 
 
