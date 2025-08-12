@@ -5,8 +5,10 @@
 #include "driver_uart.hpp"
 #include "driver_systick.hpp"
 
+extern driver::gpio::Pin pa4;
 extern driver::gpio::Pin pa5;
-
+extern driver::gpio::Pin pa6;
+extern driver::gpio::Pin pa7;
 
 void config_drivers();
 
