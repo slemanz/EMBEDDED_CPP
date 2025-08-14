@@ -2,6 +2,7 @@
 #include "driver_adc.hpp"
 #include "driver_spi.hpp"
 #include <cstdio>
+#include <cstdint>
 
 using namespace driver;
 using namespace mcal;
@@ -20,16 +21,37 @@ int main(void)
     spi::Spi spi1(spi::Instance::SPI1);
     spi1.init(spi::Mode::Mode0, spi::BaudRate::Div16);
 
-    uint8_t data_tx[10] = "Hello";
+    uint8_t data_tx[15] = "Hello World";
+    uint8_t data_rx[10] = {2, 2, 2, 2, 2};
+    driver::systick::Systick::delay_ms(1000);
 
-    printf("SPI1 CR1: ");
-    printf("%lX\n", reg_access::reg_get(reg::spi1_base + reg::spi::offset::cr1));
-    
+    for(uint32_t i = 0; i < 5; i++)
+    {
+        printf("0x%x ", data_rx[i]);
+    }
+    printf("\n");
+
+    pa4.write(gpio::State::Low);
+    spi1.write(data_tx, 11);
+    while(spi1.is_busy());
+    spi1.read(data_rx, 5);
+    while(spi1.is_busy());
+    pa4.write(gpio::State::High);
+    driver::systick::Systick::delay_ms(1000);
+
+    for(uint32_t i = 0; i < 5; i++)
+    {
+        printf("0x%x ", data_rx[i]);
+    }
+    printf("\n");
+
     driver::systick::Systick::delay_ms(1000);
     while(1)
     {
         pa4.write(gpio::State::Low);
-        spi1.write(data_tx, 5);
+        spi1.write(data_tx, 11);
+        while(spi1.is_busy());
+        spi1.read(data_rx, 5);
         while(spi1.is_busy());
         pa4.write(gpio::State::High);
         driver::systick::Systick::delay_ms(1000);
