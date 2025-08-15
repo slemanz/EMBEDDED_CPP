@@ -22,27 +22,18 @@ int main(void)
     spi1.init(spi::Mode::Mode0, spi::BaudRate::Div16);
 
     uint8_t data_tx[15] = "Hello World";
-    uint8_t data_rx[10] = {2, 2, 2, 2, 2};
-    driver::systick::Systick::delay_ms(1000);
-
-    for(uint32_t i = 0; i < 5; i++)
-    {
-        printf("0x%x ", data_rx[i]);
-    }
-    printf("\n");
+    uint8_t data_rx[10]; 
+    driver::systick::Systick::delay_ms(500);
 
     pa4.write(gpio::State::Low);
     spi1.write(data_tx, 11);
-    while(spi1.is_busy());
     spi1.read(data_rx, 5);
     while(spi1.is_busy());
     pa4.write(gpio::State::High);
     driver::systick::Systick::delay_ms(1000);
 
-    for(uint32_t i = 0; i < 5; i++)
-    {
-        printf("0x%x ", data_rx[i]);
-    }
+    printf("Read from Spi: ");
+    for(uint32_t i = 0; i < 5; i++) printf("0x%x ", data_rx[i]);
     printf("\n");
 
     driver::systick::Systick::delay_ms(1000);
@@ -50,7 +41,6 @@ int main(void)
     {
         pa4.write(gpio::State::Low);
         spi1.write(data_tx, 11);
-        while(spi1.is_busy());
         spi1.read(data_rx, 5);
         while(spi1.is_busy());
         pa4.write(gpio::State::High);

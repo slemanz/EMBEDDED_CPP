@@ -1,5 +1,4 @@
 #include "driver_spi.hpp"
-#include <stdio.h>
 
 using namespace driver::spi;
 using namespace mcal;
@@ -20,8 +19,6 @@ void Spi::init(Mode mode, BaudRate baudrate, DataSize data_size, BitOrder bit_or
     // Software slave management
     cr1_value |= (1U << reg::spi::bitpos::cr1::ssm);
     cr1_value |= (1U << reg::spi::bitpos::cr1::ssi);
-
-    printf("REG: %lX\n", cr1_value);
 
     reg_access::reg_set(base + reg::spi::offset::cr1, cr1_value);
     enable();
@@ -62,10 +59,15 @@ bool Spi::is_rx_not_empty() const
 void Spi::write(uint8_t *data, uint32_t Len) const
 {
     const uint32_t base = get_base_address();
+    uint8_t dummy = 0xFF;
     while(Len > 0)
     {
         while(!is_tx_empty());
         reg_access::reg_set(base + reg::spi::offset::dr, *data);
+
+        while(!is_rx_not_empty());
+        dummy = static_cast<uint8_t>(reg_access::reg_get(base + reg::spi::offset::dr));
+        (void)dummy;
 
         Len--;
         data++;
@@ -76,9 +78,9 @@ void Spi::read(uint8_t *data, uint32_t Len) const
 {
     uint8_t dummy = 0xFF;
     const uint32_t base = get_base_address();
-    while(!is_tx_empty());
     while(Len > 0)
     {
+        while(!is_tx_empty());
         reg_access::reg_set(base + reg::spi::offset::dr, dummy);
 
         while(!is_rx_not_empty());
