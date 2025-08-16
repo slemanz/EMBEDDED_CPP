@@ -36,6 +36,7 @@ DRIVERS		+= $(BUILD_DIR)/driver_gpio.o
 DRIVERS		+= $(BUILD_DIR)/driver_uart.o
 DRIVERS		+= $(BUILD_DIR)/driver_adc.o
 DRIVERS		+= $(BUILD_DIR)/driver_spi.o
+DRIVERS		+= $(BUILD_DIR)/driver_i2c.o
 
 
 

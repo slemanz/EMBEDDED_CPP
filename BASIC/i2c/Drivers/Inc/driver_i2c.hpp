@@ -17,8 +17,7 @@ namespace driver
         enum class Mode : uint8_t
         {
             Standard,   // 100 kHz
-            Fast,       // 400 kHz
-            FastPlus    // 1 MHz
+            Fast        // 400 kHz
         };
 
         enum class AddressingMode : uint8_t
