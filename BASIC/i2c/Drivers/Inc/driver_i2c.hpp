@@ -56,8 +56,8 @@ namespace driver
                 void generate_stop() const;
                 
                 void send_address(uint8_t address, bool read) const;
-                void send_data(uint8_t data) const;
-                uint8_t receive_data(AckControl ack) const;
+                void send_data(uint8_t *data, uint32_t Len) const;
+                void receive_data(uint8_t *data, uint32_t Len, AckControl ack) const;
                 
                 bool is_busy() const;
                 bool is_transfer_complete() const;
