@@ -564,7 +564,6 @@ namespace mcal
                     constexpr std::uint32_t smbalert    = (1U << bitpos::sr1::smbalert);
                 }
             }
-
         } // namespace i2c
 
     } // reg
