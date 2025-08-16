@@ -5,10 +5,8 @@
 using namespace driver;
 using namespace mcal;
 
-// PA4 - GPIO NSS
-// PA5 - SPI1_SCK  (AF05)
-// PA6 - SPI1_MISO (AF05)
-// PA7 - SPI1_MOSI (AF05)
+// PB6 - I2C1 SCL
+// PB7 - I2C1 SDA
 
 int main(void)
 {
