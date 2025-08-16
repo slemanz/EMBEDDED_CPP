@@ -10,10 +10,8 @@ uart::Uart serial(uart::Instance::USART2);
 // PB6 - I2C1 SCL
 // PB7 - I2C1 SDA
 
-gpio::Pin pa4(gpio::Port::A, 4);
-gpio::Pin pa5(gpio::Port::A, 5);
-gpio::Pin pa6(gpio::Port::A, 6);
-gpio::Pin pa7(gpio::Port::A, 7);
+gpio::Pin pb6(gpio::Port::B, 6);
+gpio::Pin pb7(gpio::Port::B, 7);
 
 void config_drivers()
 {
@@ -30,26 +28,17 @@ void config_drivers()
                     gpio::Pull::None,
                     mcal::reg::gpio::altfn::pa2_usart2_tx);
 
-    pa4.configure(gpio::Mode::Output);
-    pa4.write(gpio::State::High);
-
-    pa5.configure(  gpio::Mode::Alternate,
-                    gpio::OutputType::PushPull,
+    pb6.configure(  gpio::Mode::Alternate,
+                    gpio::OutputType::OpenDrain,
                     gpio::Speed::High,
                     gpio::Pull::None,
-                    5U);
+                    4U);
 
-    pa6.configure(  gpio::Mode::Alternate,
-                    gpio::OutputType::PushPull,
+    pb7.configure(  gpio::Mode::Alternate,
+                    gpio::OutputType::OpenDrain,
                     gpio::Speed::High,
                     gpio::Pull::None,
-                    5U);
-
-    pa7.configure(  gpio::Mode::Alternate,
-                    gpio::OutputType::PushPull,
-                    gpio::Speed::High,
-                    gpio::Pull::None,
-                    5U);
+                    4U);
 
     serial.init(uart::BaudRate::BR_9600, uart::Mode::Tx);
     systick::Systick::init();
