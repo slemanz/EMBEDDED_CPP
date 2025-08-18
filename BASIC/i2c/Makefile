@@ -30,6 +30,8 @@ OBJS		+= $(BUILD_DIR)/config.o
 OBJS		+= $(BUILD_DIR)/syscalls.o
 OBJS		+= $(BUILD_DIR)/startup.o
 
+OBJS		+= $(BUILD_DIR)/ds3231.o
+
 DRIVERS		+= $(BUILD_DIR)/driver_systick.o
 DRIVERS		+= $(BUILD_DIR)/driver_nvic.o
 DRIVERS		+= $(BUILD_DIR)/driver_gpio.o

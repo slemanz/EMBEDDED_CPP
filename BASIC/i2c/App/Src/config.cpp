@@ -2,6 +2,7 @@
 #include "driver_gpio.hpp"
 #include "driver_uart.hpp"
 #include "driver_systick.hpp"
+#include "driver_i2c.hpp"
 
 using namespace driver;
 
@@ -12,6 +13,7 @@ uart::Uart serial(uart::Instance::USART2);
 
 gpio::Pin pb6(gpio::Port::B, 6);
 gpio::Pin pb7(gpio::Port::B, 7);
+i2c::I2C i2c1(driver::i2c::Instance::I2C1);
 
 void config_drivers()
 {
@@ -42,6 +44,9 @@ void config_drivers()
 
     serial.init(uart::BaudRate::BR_9600, uart::Mode::Tx);
     systick::Systick::init();
+
+    i2c1.init(driver::i2c::Mode::Standard);
+
     systick::Systick::delay_ms(1000);
 }
 
