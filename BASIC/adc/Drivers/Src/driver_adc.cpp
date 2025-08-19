@@ -46,7 +46,6 @@ void Adc::configure_channel(Channel channel, SampleTime sample_time, bool enable
 {
     const uint32_t base = get_base_address();
 
-    /*
     if(channel < Channel::Ch10)
     {
         const uint32_t shift = static_cast<uint32_t>(channel) * 3;
@@ -57,7 +56,7 @@ void Adc::configure_channel(Channel channel, SampleTime sample_time, bool enable
         const uint32_t shift = (static_cast<uint32_t>(channel)-10) * 3;
         reg_access::reg_not(base + reg::adc::offset::smpr1, (7 << shift));
         reg_access::reg_or(base + reg::adc::offset::smpr1, ( static_cast<uint32_t>(sample_time) << shift));
-    }*/
+    }
 
     // Configure sequence (simple single channel mode)
     if(enable)

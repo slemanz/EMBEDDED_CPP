@@ -43,6 +43,14 @@ namespace mcal
 
         constexpr std::uint32_t adc1_base       = apb2periph_base + 0x2000;
 
+        constexpr std::uint32_t spi1_base       = apb2periph_base + 0x3000;
+        constexpr std::uint32_t spi2_base       = apb1periph_base + 0x3800;
+        constexpr std::uint32_t spi3_base       = apb1periph_base + 0x3C00;
+        constexpr std::uint32_t spi4_base       = apb2periph_base + 0x3400;
+
+        constexpr std::uint32_t i2c1_base       = apb1periph_base + 0x5400;
+        constexpr std::uint32_t i2c2_base       = apb1periph_base + 0x5800;
+        constexpr std::uint32_t i2c3_base       = apb1periph_base + 0x5C00;
         
         // Port registers.
         namespace gpio
@@ -379,6 +387,184 @@ namespace mcal
                 }
             }
         } // namespace adc
+
+        namespace spi
+        {
+            namespace offset
+            {
+                constexpr std::uint32_t cr1             = 0x00;
+                constexpr std::uint32_t cr2             = 0x04;
+                constexpr std::uint32_t sr              = 0x08;
+                constexpr std::uint32_t dr              = 0x0C;
+                constexpr std::uint32_t crcpr           = 0x10;
+                constexpr std::uint32_t rxcrcr          = 0x14;
+                constexpr std::uint32_t txcrcr          = 0x18;
+                constexpr std::uint32_t i2scfgr         = 0x1C;
+                constexpr std::uint32_t i2spr           = 0x20;
+            } // namespace offset
+
+            namespace bitpos
+            {
+                namespace cr1
+                {
+                    constexpr std::uint32_t cpha        = 0U;
+                    constexpr std::uint32_t cpol        = 1U;
+                    constexpr std::uint32_t mstr        = 2U;
+                    constexpr std::uint32_t br          = 3U;
+                    constexpr std::uint32_t spe         = 6U;
+                    constexpr std::uint32_t lsbfirst    = 7U;
+                    constexpr std::uint32_t ssi         = 8U;
+                    constexpr std::uint32_t ssm         = 9U;
+                    constexpr std::uint32_t rxonly      = 10U;
+                    constexpr std::uint32_t dff         = 11U;
+                    constexpr std::uint32_t crcnext     = 12U;
+                    constexpr std::uint32_t crcen       = 13U;
+                    constexpr std::uint32_t bidioe      = 14U;
+                    constexpr std::uint32_t bidimode    = 15U;
+                }
+
+                namespace sr
+                {
+                    constexpr std::uint32_t rxne        = 0U;
+                    constexpr std::uint32_t txe         = 1U;
+                    constexpr std::uint32_t chside      = 2U;
+                    constexpr std::uint32_t udr         = 3U;
+                    constexpr std::uint32_t crcerr      = 4U;
+                    constexpr std::uint32_t modf        = 5U;
+                    constexpr std::uint32_t ovr         = 6U;
+                    constexpr std::uint32_t bsy         = 7U;
+                    constexpr std::uint32_t fre         = 8U;
+                }
+            } // namespace bitpos
+
+            namespace mask
+            {
+                namespace cr1
+                {
+                    constexpr std::uint32_t cpha        = (1U << bitpos::cr1::cpha);
+                    constexpr std::uint32_t cpol        = (1U << bitpos::cr1::cpol);
+                    constexpr std::uint32_t mstr        = (1U << bitpos::cr1::mstr);
+                    constexpr std::uint32_t br          = (7U << bitpos::cr1::br);
+                    constexpr std::uint32_t spe         = (1U << bitpos::cr1::spe);
+                    constexpr std::uint32_t lsbfirst    = (1U << bitpos::cr1::lsbfirst);
+                    constexpr std::uint32_t ssi         = (1U << bitpos::cr1::ssi);
+                    constexpr std::uint32_t ssm         = (1U << bitpos::cr1::ssm);
+                    constexpr std::uint32_t rxonly      = (1U << bitpos::cr1::rxonly);
+                    constexpr std::uint32_t dff         = (1U << bitpos::cr1::dff);
+                    constexpr std::uint32_t crcnext     = (1U << bitpos::cr1::crcnext);
+                    constexpr std::uint32_t crcen       = (1U << bitpos::cr1::crcen);
+                    constexpr std::uint32_t bidioe      = (1U << bitpos::cr1::bidioe);
+                    constexpr std::uint32_t bidimode    = (1U << bitpos::cr1::bidimode);
+                }
+
+                namespace sr
+                {
+                    constexpr std::uint32_t rxne        = (1U << bitpos::sr::rxne);
+                    constexpr std::uint32_t txe         = (1U << bitpos::sr::txe);
+                    constexpr std::uint32_t chside      = (1U << bitpos::sr::chside);
+                    constexpr std::uint32_t udr         = (1U << bitpos::sr::udr);
+                    constexpr std::uint32_t crcerr      = (1U << bitpos::sr::crcerr);
+                    constexpr std::uint32_t modf        = (1U << bitpos::sr::modf);
+                    constexpr std::uint32_t ovr         = (1U << bitpos::sr::ovr);
+                    constexpr std::uint32_t bsy         = (1U << bitpos::sr::bsy);
+                    constexpr std::uint32_t fre         = (1U << bitpos::sr::fre);
+                }
+            } // namespace bitpos
+        } // namespace spi
+
+        namespace i2c
+        {
+            namespace offset
+            {
+                constexpr std::uint32_t cr1        = 0x00;
+                constexpr std::uint32_t cr2        = 0x04;
+                constexpr std::uint32_t oar1       = 0x08;
+                constexpr std::uint32_t oar2       = 0x0C;
+                constexpr std::uint32_t dr         = 0x10;
+                constexpr std::uint32_t sr1        = 0x14;
+                constexpr std::uint32_t sr2        = 0x18;
+                constexpr std::uint32_t ccr        = 0x1C;
+                constexpr std::uint32_t trise      = 0x20;
+            } // namespace offset
+
+            namespace bitpos
+            {
+                 namespace cr1
+                {
+                    constexpr std::uint32_t pe          = 0U;
+                    constexpr std::uint32_t smbus       = 1U;
+                    constexpr std::uint32_t smbtype     = 3U;
+                    constexpr std::uint32_t enarp       = 4U;
+                    constexpr std::uint32_t enpec       = 5U;
+                    constexpr std::uint32_t engc        = 6U;
+                    constexpr std::uint32_t nostretch   = 7U;
+                    constexpr std::uint32_t start       = 8U;
+                    constexpr std::uint32_t stop        = 9U;
+                    constexpr std::uint32_t ack         = 10U;
+                    constexpr std::uint32_t pos         = 11U;
+                    constexpr std::uint32_t pec         = 12U;
+                    constexpr std::uint32_t alert       = 13U;
+                    constexpr std::uint32_t swrst       = 15U;
+                }
+
+                namespace sr1
+                {
+                    constexpr std::uint32_t sb          = 0U;
+                    constexpr std::uint32_t addr        = 1U;
+                    constexpr std::uint32_t btf         = 2U;
+                    constexpr std::uint32_t add10       = 3U;
+                    constexpr std::uint32_t stopf       = 4U;
+                    constexpr std::uint32_t rxne        = 6U;
+                    constexpr std::uint32_t txe         = 7U;
+                    constexpr std::uint32_t berr        = 8U;
+                    constexpr std::uint32_t arlo        = 9U;
+                    constexpr std::uint32_t af          = 10U;
+                    constexpr std::uint32_t ovr         = 11U;
+                    constexpr std::uint32_t pec         = 12U;
+                    constexpr std::uint32_t timeout     = 14U;
+                    constexpr std::uint32_t smbalert    = 15U;
+                }
+            }
+
+            namespace mask
+            {
+                 namespace cr1
+                {
+                    constexpr std::uint32_t pe          = (1U << bitpos::cr1::pe);
+                    constexpr std::uint32_t smbus       = (1U << bitpos::cr1::smbus);
+                    constexpr std::uint32_t smbtype     = (1U << bitpos::cr1::smbtype);
+                    constexpr std::uint32_t enarp       = (1U << bitpos::cr1::enarp);
+                    constexpr std::uint32_t enpec       = (1U << bitpos::cr1::enpec);
+                    constexpr std::uint32_t engc        = (1U << bitpos::cr1::engc);
+                    constexpr std::uint32_t nostretch   = (1U << bitpos::cr1::nostretch);
+                    constexpr std::uint32_t start       = (1U << bitpos::cr1::start);
+                    constexpr std::uint32_t stop        = (1U << bitpos::cr1::stop);
+                    constexpr std::uint32_t ack         = (1U << bitpos::cr1::ack);
+                    constexpr std::uint32_t pos         = (1U << bitpos::cr1::pos);
+                    constexpr std::uint32_t pec         = (1U << bitpos::cr1::pec);
+                    constexpr std::uint32_t alert       = (1U << bitpos::cr1::alert);
+                    constexpr std::uint32_t swrst       = (1U << bitpos::cr1::swrst);
+                }
+
+                namespace sr1
+                {
+                    constexpr std::uint32_t sb          = (1U << bitpos::sr1::sb);
+                    constexpr std::uint32_t addr        = (1U << bitpos::sr1::addr);
+                    constexpr std::uint32_t btf         = (1u << bitpos::sr1::btf);
+                    constexpr std::uint32_t add10       = (1U << bitpos::sr1::add10);
+                    constexpr std::uint32_t stopf       = (1U << bitpos::sr1::stopf);
+                    constexpr std::uint32_t rxne        = (1U << bitpos::sr1::rxne);
+                    constexpr std::uint32_t txe         = (1U << bitpos::sr1::txe);
+                    constexpr std::uint32_t berr        = (1U << bitpos::sr1::berr);
+                    constexpr std::uint32_t arlo        = (1U << bitpos::sr1::arlo);
+                    constexpr std::uint32_t af          = (1U << bitpos::sr1::af);
+                    constexpr std::uint32_t ovr         = (1U << bitpos::sr1::ovr);
+                    constexpr std::uint32_t pec         = (1U << bitpos::sr1::pec);
+                    constexpr std::uint32_t timeout     = (1U << bitpos::sr1::timeout);
+                    constexpr std::uint32_t smbalert    = (1U << bitpos::sr1::smbalert);
+                }
+            }
+        } // namespace i2c
 
     } // reg
 } // mcal
