@@ -10,5 +10,5 @@ Driver:
 
 - **[mcal_reg.cpp](Drivers/Inc/mcal_reg.hpp)**
 - **[mcal_reg_access.cpp](Drivers/Inc/mcal_reg_access.hpp)**
-- **[driver_uart.hpp](Drivers/Inc/driver_systick.hpp)**
-- **[driver_uart.cpp](Drivers/Src/driver_systick.cpp)**
+- **[driver_systick.hpp](Drivers/Inc/driver_systick.hpp)**
+- **[driver_systick.cpp](Drivers/Src/driver_systick.cpp)**
